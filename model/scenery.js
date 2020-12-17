@@ -9,8 +9,43 @@ const scenerySchema = new Schema({
         },
         // 景点英文名
         name_en: {
+            type: String
+        },
+        // 景点id
+        s_id: {
             type: String,
             require: true
+        },
+        // 景点经度
+        longitude: {
+            type: String,
+            require: true
+        },
+        // 景点纬度
+        latitude: {
+            type: String,
+            require: true
+        },
+        // 景点地址
+        address: {
+            type: String,
+            require: true
+        },
+        // 景点人气排行
+        hotSort: {
+            type: Number
+        },
+        // 景点代言词
+        pronoun: {
+            type: String
+        },
+        // 景点级别  例如：5A
+        rank: {
+            type: Number
+        },
+        // 景点热度
+        heat: {
+            type: Number
         },
         // 景点概述
         survey: {
@@ -67,7 +102,7 @@ const scenerySchema = new Schema({
         },
         // 景点排名
         survey_sort: {
-            type: String
+            type: Number
         },
         // 景点星级
         survey_start: {

@@ -66,7 +66,11 @@ app.use(expressJwt({
         '/api/v1/user/register',
         '/api/v1/user/wxLogin',
         '/api/v1/scenery/getList',
-        '/api/v1/scenery/hotScenery'
+        '/api/v1/scenery/hotSearch',
+        '/api/v1/scenery/getSceneryLocation',
+        '/api/v1/scenery/getHotSort',
+        '/api/v1/scenery/getSurveySort',
+        '/api/v1/scenery/getHotSortAll'
     ]
 }))
 
