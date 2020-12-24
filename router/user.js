@@ -59,14 +59,4 @@ router.get('/getUser', (req, res) => {
     })
 })
 
-// 微信登录
-router.post('/wxLogin',(req, res)=>{
-    const code = req.body.code
-    request(`https://api.weixin.qq.com/sns/jscode2session?appid=wx98c5e1eece849cd0&secret=af310b95340bde6f9a740fc791a4904c&js_code=${code}&grant_type=authorization_code`,(error, response, body)=>{
-        if(!error && response.statusCode==200){
-            res.json(successMsg(JSON.parse(body)));
-        }
-    })
-})
-
 module.exports = router;

@@ -70,7 +70,8 @@ app.use(expressJwt({
         '/api/v1/scenery/getSceneryLocation',
         '/api/v1/scenery/getHotSort',
         '/api/v1/scenery/getSurveySort',
-        '/api/v1/scenery/getHotSortAll'
+        '/api/v1/scenery/getHotSortAll',
+        '/api/v1/wxUser/authLogin'
     ]
 }))
 
@@ -80,6 +81,7 @@ app.use("/api/v1/system", require("./router/getBase"));
 app.use("/api/v1/welcome", require("./router/weclome"));
 app.use("/api/v1/getAPI", require("./router/API"));
 app.use("/api/v1/scenery", require("./router/scenery"));
+app.use("/api/v1/wxUser", require("./router/wxUser"));
 
 //token失效统一返回
 app.use(function (err, req, res, next) {

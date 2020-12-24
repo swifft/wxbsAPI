@@ -153,22 +153,6 @@ router.post('/edit', (req, res) => {
     })
 })
 
-router.get('/getList',(req, res)=>{
-    if (req.query.id){
-        scenery.findOne({'_id':req.query.id}).then(doc =>{
-            res.json(successMsg(doc))
-        }).catch(err =>{
-            res.json(errorMsg(err))
-        })
-    }else {
-        scenery.find().then(doc =>{
-            res.json(successMsg(doc))
-        }).catch(err =>{
-            res.json(errorMsg(err))
-        })
-    }
-})
-
 router.get("/getSceneryLocation",(req,res)=>{
     request({
         url: encodeURI('http://api.map.baidu.com/geocoding/v3/?city=桂林市&output=json&ak=fgbYf5TN6ySeyrLjjzkQjl7WvtRANnNP&address=' + req.query.sceneryName + '景区'),
@@ -212,7 +196,7 @@ router.get('/getHotSort',(req, res)=>{
 })
 
 // 分页查询
-router.get('/getHotSortAll',(req, res)=>{
+    router.get('/getHotSortAll',(req, res)=>{
     const page = req.query.page
     const limit = req.query.pageLimit
     scenery.find({}).skip((page - 1)*parseInt(limit)).sort({'hotSort':1}).limit(parseInt(limit)).then(doc =>{
@@ -228,6 +212,23 @@ router.get('/getSurveySort',(req, res)=>{
     }).catch(err =>{
         res.json(errorMsg(err))
     })
+})
+
+// 小程序和PC后台管理系统通用
+router.get('/getList',(req, res)=>{
+    if (req.query.id){
+        scenery.findOne({'_id':req.query.id}).then(doc =>{
+            res.json(successMsg(doc))
+        }).catch(err =>{
+            res.json(errorMsg(err))
+        })
+    }else {
+        scenery.find().then(doc =>{
+            res.json(successMsg(doc))
+        }).catch(err =>{
+            res.json(errorMsg(err))
+        })
+    }
 })
 
 module.exports = router
