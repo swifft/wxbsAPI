@@ -71,7 +71,12 @@ app.use(expressJwt({
         '/api/v1/scenery/getHotSort',
         '/api/v1/scenery/getSurveySort',
         '/api/v1/scenery/getHotSortAll',
-        '/api/v1/wxUser/authLogin'
+        '/api/v1/wxUser/authLogin',
+        '/api/v1/wxUser/editUserInfo',
+        '/api/v1/records/getAll',
+        '/api/v1/records/getDetailRecordById',
+        '/api/v1/common/getHotelList',
+        '/api/v1/common/getHotelDetail',
     ]
 }))
 
@@ -82,6 +87,8 @@ app.use("/api/v1/welcome", require("./router/weclome"));
 app.use("/api/v1/getAPI", require("./router/API"));
 app.use("/api/v1/scenery", require("./router/scenery"));
 app.use("/api/v1/wxUser", require("./router/wxUser"));
+app.use("/api/v1/records", require("./router/records"));
+app.use("/api/v1/common", require("./router/common"));
 
 //token失效统一返回
 app.use(function (err, req, res, next) {

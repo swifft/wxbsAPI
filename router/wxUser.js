@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { successMsg, errorMsg } = require('../untils/returnMsg')
 const wxUser = require('../model/wxUser')
-const moment = require('moment');
 const jwt = require('../untils/tokenFun')
 const request = require('request')
 
@@ -52,6 +51,23 @@ router.post("/authLogin",(req, res)=>{
                     })
                 }
             })
+        }
+    })
+})
+
+//微信个人信息修改
+router.post("/editUserInfo",(req, res)=>{
+    const editData = {
+        avatarUrl: req.body.avatarUrl,
+        nickName: req.body.nickName,
+        sex: req.body.sex
+    }
+
+    wxUser.findByIdAndUpdate(req.body.id,editData,{new : true},(err, doc)=>{
+        if (err){
+            res.json(errorMsg(err))
+        }else {
+            res.json(successMsg(doc))
         }
     })
 })
