@@ -77,6 +77,7 @@ app.use(expressJwt({
         '/api/v1/records/getDetailRecordById',
         '/api/v1/common/getHotelList',
         '/api/v1/common/getHotelDetail',
+        '/api/v1/common/getAllBanner',
     ]
 }))
 

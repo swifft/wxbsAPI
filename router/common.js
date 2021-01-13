@@ -2,6 +2,49 @@ const express = require('express');
 const router = express.Router();
 const {successMsg, errorMsg} = require('../untils/returnMsg')
 const request = require('request')
+const banner = require('../model/banner')
+
+router.post("/saveBanner", (req, res)=>{
+    const newData = new banner({
+        list:req.body.list
+    })
+
+    newData.save().then((result) => {
+        res.json(successMsg(result))
+    }).catch((error) => {
+        res.json(errorMsg(error))
+    })
+})
+
+router.post("/editBanner", (req, res)=>{
+    const newData ={
+        list:req.body.list
+    }
+
+    banner.findByIdAndUpdate(req.body._id,newData,{new : true},(err, doc)=>{
+        if (err){
+            res.json(errorMsg(err))
+        }else {
+            res.json(successMsg(doc))
+        }
+    })
+})
+
+router.get("/getAllBannerPC", (req, res)=>{
+    banner.find().then((result) => {
+        res.json(successMsg(result))
+    }).catch((error) => {
+        res.json(errorMsg(error))
+    })
+})
+
+router.get("/getAllBanner", (req, res)=>{
+    banner.find().then((result) => {
+        res.json(successMsg(result))
+    }).catch((error) => {
+        res.json(errorMsg(error))
+    })
+})
 
 router.get('/getHotelList', (req, res) => {
     const distanceType = req.query.distanceType
