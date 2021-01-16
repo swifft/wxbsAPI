@@ -13,7 +13,7 @@ router.post("/save",(req, res)=>{
         // 审核状态： 0 未审核 /  1 审核中 /  2 审核通过 / 3 审核未通过
         status: req.body.status,
         // 额外附带信息 如 审核不通过原因等
-        statusTips: req.body.statusTips
+        statusTips: null
     })
 
     newRecord.save().then((result) => {
@@ -47,4 +47,29 @@ router.get("/getDetailRecordById",(req, res)=>{
     })
 })
 
+
+// PC端
+// 获取所有记录
+router.get("/PC/getAll",(req, res)=>{
+    records.find({'status':req.query.status}).sort({'create_time':-1}).populate('wxUser_id').then((result) => {
+        res.json(successMsg(result))
+    }).catch((error) => {
+        res.json(errorMsg(error))
+    })
+})
+
+// 修改记录审核状态
+router.post("/PC/editStatus",(req, res)=>{
+    const newData = {
+        status : req.body.status,
+        statusTips : req.body.statusTips ? req.body.statusTips : null
+    }
+    records.findByIdAndUpdate(req.body.id,newData,{new : true},(err, doc)=>{
+        if (err){
+            res.json(errorMsg(err))
+        }else {
+            res.json(successMsg(doc))
+        }
+    })
+})
 module.exports = router;

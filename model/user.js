@@ -9,6 +9,11 @@ const UserSchema = new Schema({
     password: {
         type: String,
         require: true
+    },
+    // 用户权限 0:普通管理员  1:超级管理员
+    authority: {
+        type: Number,
+        default: 0
     }
 }, {
     timestamps: {

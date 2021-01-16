@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../model/use');
+const User = require('../model/user');
 const { successMsg, errorMsg } = require('../untils/returnMsg')
 const jwt = require('../untils/tokenFun')
 const bcrypt = require('../untils/bcrypt')
@@ -16,7 +16,8 @@ router.post('/register', (req, res) => {
         } else {
             const newData = new User({
                 account: req.body.account,
-                password: bcrypt.encryption(req.body.password)
+                password: bcrypt.encryption(req.body.password),
+                authority: req.body.authority
             })
 
             newData.save().then((result) => {
@@ -45,7 +46,23 @@ router.post('/login', (req, res) => {
             res.json(successMsg(null, { msg: '密码错误' }))
         }
     }).catch((error) => {
-        res.json(errorMsg(error))
+        res.json(successMsg(null, { msg: '用户不存在' }))
+    })
+})
+
+// 获取所有用户信息
+router.post('/editAuthority', (req, res) => {
+    const newData = {
+        'account': req.body.account,
+        'authority': req.body.authority
+    }
+
+    User.findByIdAndUpdate(req.body._id,newData,{new : true},(err, doc)=>{
+        if (err){
+            res.json(errorMsg(err))
+        }else {
+            res.json(successMsg(doc))
+        }
     })
 })
 
