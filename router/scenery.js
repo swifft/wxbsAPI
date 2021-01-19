@@ -170,6 +170,22 @@ router.get("/getSceneryLocation",(req,res)=>{
     })
 })
 
+router.get('/getList_PC',(req, res)=>{
+    if (req.query.id){
+        scenery.findOne({'_id':req.query.id}).then(doc =>{
+            res.json(successMsg(doc))
+        }).catch(err =>{
+            res.json(errorMsg(err))
+        })
+    }else {
+        scenery.find().then(doc =>{
+            res.json(successMsg(doc))
+        }).catch(err =>{
+            res.json(errorMsg(err))
+        })
+    }
+})
+
 //小程序端正式接口
 
 router.get('/hotSearch',(req, res)=>{
@@ -196,7 +212,7 @@ router.get('/getHotSort',(req, res)=>{
 })
 
 // 分页查询
-    router.get('/getHotSortAll',(req, res)=>{
+router.get('/getHotSortAll',(req, res)=>{
     const page = req.query.page
     const limit = req.query.pageLimit
     scenery.find({}).skip((page - 1)*parseInt(limit)).sort({'hotSort':1}).limit(parseInt(limit)).then(doc =>{
@@ -214,7 +230,6 @@ router.get('/getSurveySort',(req, res)=>{
     })
 })
 
-// 小程序和PC后台管理系统通用
 router.get('/getList',(req, res)=>{
     if (req.query.id){
         scenery.findOne({'_id':req.query.id}).then(doc =>{

@@ -14,6 +14,11 @@ const UserSchema = new Schema({
     authority: {
         type: Number,
         default: 0
+    },
+    // 账号状态 0:禁用  1:启用
+    status: {
+        type: Number,
+        default: 0
     }
 }, {
     timestamps: {
