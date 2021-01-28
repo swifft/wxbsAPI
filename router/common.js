@@ -50,7 +50,7 @@ router.get('/getHotelList', (req, res) => {
     const distanceType = req.query.distanceType
     if (distanceType) {
         request({
-            url: 'http://api.map.baidu.com/place/v2/search?query=%E9%85%92%E5%BA%97&location=' + req.query.lat + ',' + req.query.lng + '&output=json&ak=fgbYf5TN6ySeyrLjjzkQjl7WvtRANnNP&scope=2&page_size=10&page_num=' + req.query.pageNum +'&filter=sort_name:distance|sort_rule:'+ distanceType,
+            url: 'https://restapi.amap.com/v3/place/around?key=dd4223750904121cdfeed886afab03ab&location=' + req.query.lat + ',' + req.query.lng + '&types=100000&extensions=all&offset=10&page=' + req.query.pageNum +'&sortrule=weight',
             method: 'GET',
             headers: {'Content-Type': 'text/json'}
         }, (error, response, body) => {
@@ -60,7 +60,7 @@ router.get('/getHotelList', (req, res) => {
         })
     } else {
         request({
-            url: 'http://api.map.baidu.com/place/v2/search?query=%E9%85%92%E5%BA%97&location=' + req.query.lat + ',' + req.query.lng + '&output=json&ak=fgbYf5TN6ySeyrLjjzkQjl7WvtRANnNP&scope=2&page_size=10&page_num=' + req.query.pageNum,
+            url: 'https://restapi.amap.com/v3/place/around?key=dd4223750904121cdfeed886afab03ab&location=' + req.query.lat + ',' + req.query.lng + '&types=100000&extensions=all&offset=10&page=' + req.query.pageNum,
             method: 'GET',
             headers: {'Content-Type': 'text/json'}
         }, (error, response, body) => {

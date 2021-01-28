@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {successMsg, errorMsg} = require('../untils/returnMsg')
 const records = require('../model/records')
+const comment = require('../model/comment')
 
 router.post("/save", (req, res) => {
     const newRecord = new records({
@@ -24,7 +25,9 @@ router.post("/save", (req, res) => {
 })
 
 router.get("/getAll", (req, res) => {
-    records.find().sort({'create_time': -1}).populate('wxUser_id').then((result) => {
+    const page = req.query.page
+    const pageSize = req.query.pageSize
+    records.find({'status': 2}).sort({'create_time': -1}).skip((page - 1) * parseInt(pageSize)).limit(parseInt(pageSize)).populate('wxUser_id').then((result) => {
         res.json(successMsg(result))
     }).catch((error) => {
         res.json(errorMsg(error))
@@ -40,10 +43,17 @@ router.get("/getAllByUser", (req, res) => {
 })
 
 router.get("/getDetailRecordById", (req, res) => {
-    records.findOne({'_id': req.query.id}).populate('wxUser_id').then((result) => {
-        res.json(successMsg(result))
-    }).catch((error) => {
-        res.json(errorMsg(error))
+    comment.find({'recordId':req.query.id}).populate('wxUserId').sort({'create_time': -1}).then((res_comment) => {
+        const comment_counts = res_comment
+        records.findOne({'_id': req.query.id}).populate('wxUser_id').then((result) => {
+            const res_data = {
+                record_data:result,
+                comment_list:comment_counts
+            }
+            res.json(successMsg(res_data))
+        }).catch((error) => {
+            res.json(errorMsg(error))
+        })
     })
 })
 

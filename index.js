@@ -73,11 +73,18 @@ app.use(expressJwt({
         '/api/v1/scenery/getHotSortAll',
         '/api/v1/wxUser/authLogin',
         '/api/v1/wxUser/editUserInfo',
+        '/api/v1/wxUser/getVerifyCode',
+        '/api/v1/wxUser/loginByVerifyCode',
+        '/api/v1/wxUser/loginByAccount',
         '/api/v1/records/getAll',
         '/api/v1/records/getDetailRecordById',
         '/api/v1/common/getHotelList',
         '/api/v1/common/getHotelDetail',
         '/api/v1/common/getAllBanner',
+        '/api/v1/ticket/detailById',
+        '/api/v1/ticket/getList',
+        '/api/v1/comment/save',
+
     ]
 }))
 
@@ -90,6 +97,8 @@ app.use("/api/v1/scenery", require("./router/scenery"));
 app.use("/api/v1/wxUser", require("./router/wxUser"));
 app.use("/api/v1/records", require("./router/records"));
 app.use("/api/v1/common", require("./router/common"));
+app.use("/api/v1/ticket", require("./router/ticket"));
+app.use("/api/v1/comment", require("./router/comment"));
 
 //token失效统一返回
 app.use(function (err, req, res, next) {

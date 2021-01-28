@@ -47,11 +47,11 @@ router.post('/login', (req, res) => {
                     res.json(successMsg(userinfo))
                 })
             } else {
-                res.json(successMsg(null, { msg: '密码错误' }))
+                res.json(errorMsg(null, { msg: '密码错误' }))
             }
         }
     }).catch((error) => {
-        res.json(successMsg(null, { msg: '用户不存在' }))
+        res.json(errorMsg(null, { msg: '用户不存在' }))
     })
 })
 
