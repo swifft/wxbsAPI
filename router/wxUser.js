@@ -194,4 +194,21 @@ router.post('/editPassword',(req, res)=>{
     })
 })
 
+
+// PC
+// 获取所有微信用户（分页）
+router.get("/PC/getAll", (req, res) => {
+    const page = req.query.page
+    const pageSize = req.query.pageSize
+    wxUser.find().then(result =>{
+        let count = result.length
+        wxUser.find().skip((page - 1) * parseInt(pageSize)).sort({'create_time': -1}).limit(parseInt(pageSize)).then((list) => {
+            res.json(successMsg({list,total:count}))
+        }).catch((error) => {
+            res.json(errorMsg(error))
+        })
+    })
+})
+
+
 module.exports = router;
