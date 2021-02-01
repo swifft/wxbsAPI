@@ -155,7 +155,7 @@ router.post('/edit', (req, res) => {
 
 router.get("/getSceneryLocation",(req,res)=>{
     request({
-        url: encodeURI('http://api.map.baidu.com/geocoding/v3/?city=桂林市&output=json&ak=fgbYf5TN6ySeyrLjjzkQjl7WvtRANnNP&address=' + req.query.sceneryName + '景区'),
+        url: encodeURI('http://api.map.baidu.com/geocoding/v3/?city=桂林市&output=json&ak=FgG49bDCZPx62acPzPUkaX358cUFl85k&address=' + req.query.sceneryName + '景区'),
         method: 'GET',
         headers: {'Content-Type': 'text/javascript;charset=utf-8'}
     }, (error, response, body) => {
