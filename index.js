@@ -83,8 +83,7 @@ app.use(expressJwt({
         '/api/v1/common/getAllBanner',
         '/api/v1/ticket/detailById',
         '/api/v1/ticket/getList',
-        '/api/v1/comment/save',
-
+        '/api/v1/comment/save'
     ]
 }))
 

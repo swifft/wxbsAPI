@@ -71,17 +71,18 @@ router.get('/getHotelList', (req, res) => {
     }
 })
 
-router.get('/getHotelDetail', (req, res) => {
-    request({
-        url: 'http://api.map.baidu.com/place/v2/detail?uid=' + req.query.uid + '&output=json&scope=2&ak=fgbYf5TN6ySeyrLjjzkQjl7WvtRANnNP',
-        method: 'GET',
-        headers: {'Content-Type': 'text/json'}
-    }, (error, response, body) => {
-        if (!error && response.statusCode == 200) {
-            res.json(successMsg(JSON.parse(body)));
-        }
-    })
-})
+//废弃
+// router.get('/getHotelDetail', (req, res) => {
+//     request({
+//         url: 'http://api.map.baidu.com/place/v2/detail?uid=' + req.query.uid + '&output=json&scope=2&ak=fgbYf5TN6ySeyrLjjzkQjl7WvtRANnNP',
+//         method: 'GET',
+//         headers: {'Content-Type': 'text/json'}
+//     }, (error, response, body) => {
+//         if (!error && response.statusCode == 200) {
+//             res.json(successMsg(JSON.parse(body)));
+//         }
+//     })
+// })
 
 
 module.exports = router

@@ -74,7 +74,7 @@ router.get('/miniApp', (req, res) => {
 })
 
 router.get('/allApiBySort', (req, res) => {
-    API.find({ 'sort': req.query.sort }).then(result => {
+    API.find({ 'sort': req.query.sort,'type': req.query.type }).then(result => {
         res.json(successMsg(result))
     }).catch(err => {
         res.json(errorMsg(err))
